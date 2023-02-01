@@ -16,12 +16,10 @@ function Todo({ userInfo, logout }) {
   const [itemlist, setItemlist] = useState(userInfo.todos);
 
   const additem = async (text) => {
-    console.log("my text to be added", text);
     const res = await axios.post("http://192.168.29.137:8080/additem", {
       userid: userInfo.userid,
       text,
     });
-    // console.log("res.data", res.data);
     if (res.data.status == 200) {
       setItemlist(res.data.todos);
     } else {
@@ -30,12 +28,10 @@ function Todo({ userInfo, logout }) {
   };
 
   const deleteitem = async (todoid) => {
-    // console.log("todoid", todoid);
     const res = await axios.post("http://192.168.29.137:8080/deleteitem", {
       userid: userInfo.userid,
       todoid,
     });
-    // console.log("in deleteitem res.data", res.data);
     if (res.data.status == 200) {
       setItemlist(res.data.todos);
     } else {
@@ -48,9 +44,7 @@ function Todo({ userInfo, logout }) {
       id,
       isCompleted,
     });
-    // console.log("habdletoggle res", res);
     setItemlist(res.data.todos);
-    console.log("kalsjdflksdjf", itemlist);
   };
 
   return (

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, KeyboardAvoidingView, StyleSheet } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import Login from "./src/Login";
 import Signup from "./src/Signup";
@@ -17,8 +18,13 @@ export default function App() {
     toggleLoggedIn();
     setUserInfo({ userid: "", todos: [] });
   };
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+  });
   return (
-    <View>
+    <KeyboardAwareScrollView>
       {isLoggedIn ? (
         <Todo userInfo={userInfo} logout={logout} />
       ) : (
@@ -28,6 +34,7 @@ export default function App() {
             style={{
               fontSize: 30,
               marginTop: 30,
+              fontWeight: "bold",
               marginRight: "auto",
               marginLeft: "auto",
             }}
@@ -38,6 +45,6 @@ export default function App() {
           <Signup toggleLoggedIn={toggleLoggedIn} setUserInfo={setUserInfo} />
         </View>
       )}
-    </View>
+    </KeyboardAwareScrollView>
   );
 }

@@ -1,6 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 
 function Login({ toggleLoggedIn, setUserInfo }) {
   const [username, setUsername] = useState("aman");
@@ -23,30 +31,83 @@ function Login({ toggleLoggedIn, setUserInfo }) {
     }
   };
 
+  const handleForgotPassword = () => {
+    console.log("forgot password!?");
+  };
+
   return (
-    <View>
-      <Text style={{ fontSize: 30, margin: 30 }}>Login</Text>
-      <Text>Username</Text>
+    <View style={styles.container}>
+      <Text style={styles.heading}>Login</Text>
+      <Text style={styles.inputHeading}>Username</Text>
       <TextInput
-        placeholder="username"
+        style={styles.inputText}
+        placeholder="write your username"
         placeholderTextColor="gray"
         value={username}
         onChangeText={(t) => setUsername(t)}
         autoFocus
       />
 
-      <Text>Password</Text>
+      <Text style={styles.inputHeading}>Password</Text>
       <TextInput
+        style={styles.inputText}
         secureTextEntry={true}
-        placeholder="password"
+        placeholder="your password please"
         placeholderTextColor="gray"
         value={password}
         onChangeText={(t) => setPassword(t)}
       />
 
-      <Button title="Login" onPress={handleSubmit} />
+      <TouchableOpacity
+        style={styles.loginButtonContainer}
+        onPress={handleSubmit}
+      >
+        <Text style={styles.loginButton}>Login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={handleForgotPassword}
+        style={styles.forgotPassword}
+      >
+        <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+      </TouchableOpacity>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 50,
+  },
+  heading: {
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  inputHeading: {
+    marginTop: 12,
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  inputText: { fontSize: 20 },
+  loginButtonContainer: {
+    backgroundColor: "rgb(240, 240, 240)",
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 8,
+  },
+  loginButton: {
+    padding: 10,
+    fontSize: 18,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  forgotPassword: {},
+  forgotPasswordText: {
+    padding: 5,
+    textDecorationLine: "underline",
+    // backgroundColor: "rgb(240,240,240)",
+  },
+});
 
 export default Login;

@@ -23,7 +23,7 @@ function NewItemForm({ additem }) {
       marginLeft: 20,
     },
     inputText: {
-      borderColor: "pink",
+      width: "75%",
     },
     addButton: {
       backgroundColor: "rgb(240,240,240)",
