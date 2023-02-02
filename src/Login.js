@@ -1,14 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  Alert,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TextInput, Alert, TouchableOpacity } from "react-native";
+
+import { styles } from "../styles/loginStyles";
+import { env } from "../env";
 
 function Login({ toggleLoggedIn, setUserInfo }) {
   const [username, setUsername] = useState("aman");
@@ -17,7 +12,7 @@ function Login({ toggleLoggedIn, setUserInfo }) {
   const handleSubmit = async () => {
     try {
       // if field empty check
-      var res = await axios.post("http://192.168.29.137:8080/login", {
+      var res = await axios.post(env.api_url + "/login", {
         username,
         password,
       });
@@ -45,7 +40,6 @@ function Login({ toggleLoggedIn, setUserInfo }) {
         placeholderTextColor="gray"
         value={username}
         onChangeText={(t) => setUsername(t)}
-        autoFocus
       />
 
       <Text style={styles.inputHeading}>Password</Text>
@@ -73,41 +67,5 @@ function Login({ toggleLoggedIn, setUserInfo }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginLeft: 30,
-    marginRight: 30,
-    marginTop: 50,
-  },
-  heading: {
-    fontSize: 30,
-    fontWeight: "bold",
-  },
-  inputHeading: {
-    marginTop: 12,
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-  inputText: { fontSize: 20 },
-  loginButtonContainer: {
-    backgroundColor: "rgb(240, 240, 240)",
-    borderRadius: 10,
-    marginTop: 10,
-    marginBottom: 8,
-  },
-  loginButton: {
-    padding: 10,
-    fontSize: 18,
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  forgotPassword: {},
-  forgotPasswordText: {
-    padding: 5,
-    textDecorationLine: "underline",
-    // backgroundColor: "rgb(240,240,240)",
-  },
-});
 
 export default Login;

@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  Pressable,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import Checkbox from "expo-checkbox";
+import { styles } from "../styles/todoItemStyles";
 
 function TodoItem({ text, id, deleteitem, handleToggle, isCompleted }) {
   return (
@@ -41,32 +36,5 @@ function TodoItem({ text, id, deleteitem, handleToggle, isCompleted }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 15,
-    backgroundColor: "rgb(240,240,240)",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderRadius: 10,
-    marginBottom: 18,
-  },
-  left: {
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "wrap",
-  },
-  inputText: { marginRight: 20 },
-  right: {
-    borderRadius: 10,
-  },
-  textItem: {},
-  deleteText: {
-    borderRadius: 10,
-    padding: 12,
-    backgroundColor: "white",
-  },
-});
 
 export default TodoItem;

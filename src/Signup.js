@@ -1,14 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Alert,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-
+import { View, Text, TextInput, Alert, TouchableOpacity } from "react-native";
+import { styles } from "../styles/signupStyles";
+import { env } from "../env";
 function Signup({ toggleLoggedIn, setUserInfo }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +18,7 @@ function Signup({ toggleLoggedIn, setUserInfo }) {
         securityQuestion == ""
       )
         return Alert.alert("Todo List says", "No empty field");
-      const res = await axios.post("http://192.168.29.137:8080/register", {
+      const res = await axios.post(env.api_url + "/register", {
         username,
         password,
         securityquestion: securityQuestion,
@@ -49,7 +43,6 @@ function Signup({ toggleLoggedIn, setUserInfo }) {
         placeholderTextColor="gray"
         value={username}
         onChangeText={(t) => setUsername(t)}
-        autoFocus
       />
 
       <Text style={styles.inputHeading}>Password</Text>
@@ -89,35 +82,5 @@ function Signup({ toggleLoggedIn, setUserInfo }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginLeft: 30,
-    marginRight: 30,
-    marginTop: 30,
-  },
-  heading: {
-    fontSize: 30,
-    fontWeight: "bold",
-  },
-  inputHeading: {
-    marginTop: 12,
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-  inputText: { fontSize: 20 },
-  signupButtonContainer: {
-    backgroundColor: "rgb(240, 240, 240)",
-    borderRadius: 10,
-    marginTop: 12,
-    marginBottom: 30,
-  },
-  signupButton: {
-    padding: 10,
-    fontSize: 18,
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-});
 
 export default Signup;

@@ -1,22 +1,17 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-} from "react-native";
+import { Alert, Text, TouchableOpacity, View, ScrollView } from "react-native";
 import axios from "axios";
 
 import TodoItem from "./TodoItem";
 import NewItemForm from "./NewItemForm";
+import { styles } from "../styles/todoStyles";
+import { env } from "../env";
 
 function Todo({ userInfo, logout }) {
   const [itemlist, setItemlist] = useState(userInfo.todos);
 
   const additem = async (text) => {
-    const res = await axios.post("http://192.168.29.137:8080/additem", {
+    const res = await axios.post(env.api_url + "/additem", {
       userid: userInfo.userid,
       text,
     });
@@ -28,7 +23,7 @@ function Todo({ userInfo, logout }) {
   };
 
   const deleteitem = async (todoid) => {
-    const res = await axios.post("http://192.168.29.137:8080/deleteitem", {
+    const res = await axios.post(env.api_url + "/deleteitem", {
       userid: userInfo.userid,
       todoid,
     });
@@ -40,7 +35,7 @@ function Todo({ userInfo, logout }) {
   };
 
   const handleToggle = async (id, isCompleted) => {
-    const res = await axios.post("http://192.168.29.137:8080/updateitem", {
+    const res = await axios.post(env.api_url + "/updateitem", {
       id,
       isCompleted,
     });
@@ -73,28 +68,5 @@ function Todo({ userInfo, logout }) {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginLeft: 30,
-    marginRight: 30,
-    marginTop: 50,
-  },
-  heading: {
-    fontSize: 30,
-    fontWeight: "bold",
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 30,
-  },
-  logoutButton: {
-    backgroundColor: "rgb(240,240,240)",
-    fontSize: 30,
-    borderRadius: 10,
-    padding: 12,
-  },
-});
 
 export default Todo;
